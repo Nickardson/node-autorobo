@@ -1,0 +1,29 @@
+{
+  "name": "node-autorobo",
+  "version": "1.0.0",
+  "description": "simulate mouse and keyboard input, take/save screenshots",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nickardson/node-autorobo.git"
+  },
+  "keywords": [
+    "input",
+    "keyboard",
+    "mouse",
+    "robot",
+    "automation"
+  ],
+  "author": "Nickardson",
+  "license": "GPL",
+  "devDependencies": {
+    "mocha": "*",
+    "should": "^6.0.3"
+  },
+  "dependencies": {
+    "java": "^0.5.4"
+  }
+}
