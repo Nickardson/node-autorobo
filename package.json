@@ -1,10 +1,10 @@
 {
-  "name": "node-autorobo",
+  "name": "autorobo",
   "version": "1.0.0",
   "description": "simulate mouse and keyboard input, take/save screenshots",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha -w"
+    "test": "node_modules/.bin/mocha --invert --fgrep controlling"
   },
   "repository": {
     "type": "git",

@@ -12,20 +12,22 @@ var Rectangle = java.import('java.awt.Rectangle'),
 
 var robot = new Robot();
 
-exports.screenSize = function () {
+exports.screen = {};
+
+exports.screen.size = function () {
 	return new Rectangle(Toolkit.getDefaultToolkitSync().getScreenSizeSync());
 }
 
-exports.rect = function (x, y, w, h) {
+exports.screen.rect = function (x, y, w, h) {
 	return new Rectangle(x, y, w, h);
 }
 
-exports.capture = function (rect) {
-	rect = rect || exports.screenSize();
+exports.screen.shoot = function (rect) {
+	rect = rect || exports.screen.size();
 	return robot.createScreenCaptureSync(rect);
 };
 
-exports.combineVertical = function (img1, img2) {
+exports.screen.stitchVertical = function (img1, img2) {
 	var w = Math.max(img1.getWidthSync(), img2.getWidthSync());
 	var h = img1.getHeightSync() + img2.getHeightSync();
 
@@ -37,7 +39,21 @@ exports.combineVertical = function (img1, img2) {
 	graphics.disposeSync();
 
 	return img;
-}
+};
+
+exports.screen.stitchHorizontal = function (img1, img2) {
+	var w = img1.getWidthSync() + img2.getWidthSync();
+	var h = Math.max(img1.getHeightSync(), img2.getHeightSync());
+
+	var img = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+
+	var graphics = img.createGraphicsSync();
+	graphics.drawImageSync(img1, null, 0, 0);
+	graphics.drawImageSync(img2, null, img1.getWidthSync(), 0);
+	graphics.disposeSync();
+
+	return img;
+};
 
 /**
  * Saves the given BufferedImage to the given filename.
@@ -45,7 +61,7 @@ exports.combineVertical = function (img1, img2) {
  * @param  {[type]} bufimg   [description]
  * @return {[type]}          [description]
  */
-exports.saveImage = function (filename, bufimg) {
+exports.screen.save = function (filename, bufimg) {
 	ImageIO.write(bufimg, "png", new File(filename));
 };
 
@@ -55,20 +71,18 @@ exports.saveImage = function (filename, bufimg) {
  * @param  {[type]} rect     (Optional) The area of the screen to capture.
  * @return {[type]}          [description]
  */
-exports.screenshot = function (filename, rect) {
-	exports.saveImage(filename, exports.capture(rect));
+exports.screen.capture = function (filename, rect) {
+	exports.screen.save(filename, exports.screen.shoot(rect));
 };
 
-exports.mouseMove = function (x, y) {
+exports.mouse = {};
+
+exports.mouse.move = function (x, y) {
 	robot.mouseMoveSync(x, y);
 };
 
-exports.getMouseInfo = function () {
-	return MouseInfo.getPointerInfoSync();
-};
-
-exports.getMousePosition = function () {
-	return exports.getMouseInfo().getLocationSync();
+exports.mouse.position = function () {
+	return MouseInfo.getPointerInfoSync().getLocationSync();
 }
 
 /**
@@ -80,28 +94,28 @@ exports.sleep = function (time) {
 	robot.delaySync(Math.floor(time));
 }
 
-exports.MOUSE1 = InputEvent.BUTTON1_MASK;
-exports.MOUSE2 = InputEvent.BUTTON2_MASK;
-exports.MOUSE3 = InputEvent.BUTTON3_MASK;
+exports.mouse.left   = InputEvent.BUTTON1_MASK;
+exports.mouse.middle = InputEvent.BUTTON2_MASK;
+exports.mouse.right  = InputEvent.BUTTON3_MASK;
 
-exports.mousePress = function (buttons) {
-	buttons = buttons || exports.MOUSE1;
+exports.mouse.press = function (buttons) {
+	buttons = buttons || exports.mouse.left;
 	robot.mousePressSync(buttons);
 }
 
-exports.mouseRelease = function (buttons) {
-	buttons = buttons || exports.MOUSE1;
+exports.mouse.release = function (buttons) {
+	buttons = buttons || exports.mouse.left;
 	robot.mouseReleaseSync(buttons);
 }
 
-exports.mouseClick = function (buttons, delay) {
-	exports.mousePress(buttons);
+exports.mouse.click = function (buttons, delay) {
+	exports.mouse.press(buttons);
 
 	if (delay) {
 		exports.sleep(delay);
 	}
 
-	exports.mouseRelease(buttons);
+	exports.mouse.release(buttons);
 }
 
 exports.Key = KeyEvent;
