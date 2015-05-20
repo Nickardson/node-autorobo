@@ -4,7 +4,7 @@ A node module which simulates mouse and keyboard input, and take screenshots.
 
 ## Installation
 ```
-$ npm install node-autorobo
+$ npm install autorobo
 ```
 
 See requirements for: https://github.com/joeferner/node-java
