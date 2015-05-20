@@ -118,7 +118,22 @@ exports.mouse.click = function (buttons, delay) {
 	exports.mouse.release(buttons);
 }
 
-exports.Key = KeyEvent;
+/**
+ * Scrolls the mouse wheel the given number of ticks.
+ * @param  {[type]} amount [description]
+ * @return {[type]}        [description]
+ */
+exports.mouse.wheel = function (amount) {
+	robot.mouseWheelSync(amount);
+}
+
+exports.key = {};
+
+for (var prop in KeyEvent) {
+	if (prop.indexOf("VK_") == 0) {
+		exports.key[prop] = KeyEvent[prop];
+	}
+}
 
 /**
  * http://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html
@@ -127,29 +142,20 @@ exports.Key = KeyEvent;
  * @param  {[type]} code [description]
  * @return {[type]}      [description]
  */
-exports.keyPress = function (code) {
+exports.key.press = function (code) {
 	robot.keyPressSync(code);
 };
 
-exports.keyRelease = function (code) {
+exports.key.release = function (code) {
 	robot.keyReleaseSync(code);
 };
 
-exports.keyStroke = function (code, delay) {
-	exports.keyPress(code);
+exports.key.stroke = function (code, delay) {
+	exports.key.press(code);
 
 	if (delay) {
 		exports.sleep(delay);
 	}
 
-	exports.keyRelease(code);
-}
-
-/**
- * Scrolls the mouse wheel the given number of ticks.
- * @param  {[type]} amount [description]
- * @return {[type]}        [description]
- */
-exports.mouseWheel = function (amount) {
-	robot.mouseWheelSync(amount);
+	exports.key.release(code);
 }
