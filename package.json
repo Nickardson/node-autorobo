@@ -1,6 +1,6 @@
 {
   "name": "autorobo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "simulate mouse and keyboard input, take/save screenshots",
   "main": "index.js",
   "scripts": {
