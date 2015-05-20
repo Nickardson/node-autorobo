@@ -1,13 +1,6 @@
-/**
- * Being primarily a mouse/keyboard library, some tests involve moving the mouse and inputting keys.
- * So as not to wreck your computer, tests that control the mouse and keyboard are by default excluded by "--invert --fgrep controlling" in the package.json.
- *
- * Remove the "--invert" to run the tests which will move the mouse and input keys.
- */
-
 var should = require('should');
 
-var autorobo = require('./index.js');
+var autorobo = require('../index.js');
 
 describe('autorobo', function () {
 	describe('screen', function () {
@@ -99,38 +92,5 @@ describe('autorobo', function () {
 			});
 		});
 
-	});
-
-	describe('mouse', function () {
-		describe('#move()', function () {
-			it('should move the mouse (controlling)', function () {
-				autorobo.mouse.move(0, 0);
-				autorobo.mouse.move(32, 64);
-			});
-		});
-
-		describe('#position()', function () {
-			it('should get mouse position (controlling)', function () {
-				autorobo.mouse.move(32, 64);
-				
-				var pos = autorobo.mouse.position();
-				pos.x.should.eql(32);
-				pos.y.should.eql(64);
-			});
-		});
-	});
-
-	describe('#sleep', function () {
-		it('should sleep for a time', function (done) {
-			var lastTime = Date.now();
-			autorobo.sleep(1000);
-
-			var now = Date.now();
-
-			// within a margin of 50 milliseconds is good enough
-			Math.abs(now - lastTime - 1000).should.be.lessThan(50);
-
-			done();
-		});
 	});
 });

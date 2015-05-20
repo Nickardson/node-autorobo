@@ -4,7 +4,7 @@
   "description": "simulate mouse and keyboard input, take/save screenshots",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha --invert --fgrep controlling"
+    "test": "node_modules/.bin/mocha --invert --fgrep controlling tests"
   },
   "repository": {
     "type": "git",
