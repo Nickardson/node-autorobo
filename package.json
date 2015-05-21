@@ -18,7 +18,7 @@
     "automation"
   ],
   "author": "Nickardson",
-  "license": "GPL",
+  "license": "MIT",
   "devDependencies": {
     "mocha": "*",
     "should": "^6.0.3"

@@ -143,19 +143,31 @@ for (var prop in KeyEvent) {
  * @return {[type]}      [description]
  */
 exports.key.press = function (code) {
-	robot.keyPressSync(code);
+	if (code) {
+		robot.keyPressSync(code);
+	} else {
+		throw Error("Keycode must be provided, see http://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html#field_summary");
+	}
 };
 
 exports.key.release = function (code) {
-	robot.keyReleaseSync(code);
+	if (code) {
+		robot.keyReleaseSync(code);
+	} else {
+		throw Error("Keycode must be provided, see http://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html#field_summary");
+	}
 };
 
 exports.key.stroke = function (code, delay) {
-	exports.key.press(code);
+	if (code) {
+		exports.key.press(code);
 
-	if (delay) {
-		exports.sleep(delay);
+		if (delay) {
+			exports.sleep(delay);
+		}
+
+		exports.key.release(code);
+	} else {
+		throw Error("Keycode must be provided, see http://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html#field_summary");
 	}
-
-	exports.key.release(code);
 }
