@@ -12,7 +12,15 @@ describe('autorobo', function () {
 		});
 
 		describe('#position()', function () {
-			it('should get mouse position (controlling)', function () {
+			it('should get mouse position at all', function () {
+				var pos = autorobo.mouse.position();
+				
+				pos.x.should.be.type('number');
+				
+				pos.y.should.be.type('number');
+			});
+
+			it('should get mouse position accurately (controlling)', function () {
 				autorobo.mouse.move(32, 64);
 				
 				var pos = autorobo.mouse.position();

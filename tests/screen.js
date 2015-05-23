@@ -91,6 +91,20 @@ describe('autorobo', function () {
 				img.getHeightSync().should.eql(autorobo.screen.size().height);
 			});
 		});
+		
+		describe("#pixel", function () {
+			it('should get a pixel\'s color', function () {
+				var color = autorobo.screen.pixel(0, 0);
+				color.should.have.property('r');
+				color.r.should.be.type("number").within(0, 255);
+				
+				color.should.have.property('g');
+				color.g.should.be.type("number").within(0, 255);
+				
+				color.should.have.property('b');
+				color.b.should.be.type("number").within(0, 255);
+			});
+		});
 
 	});
 });

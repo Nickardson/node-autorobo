@@ -46,4 +46,7 @@ robo.screen.capture("photo.png");
 
 // save a region of the screen starting at (20, 20), with a size of (50, 50)
 robo.screen.capture("photo.png", robo.screen.rect(20, 20, 50, 50));
+
+// Get the color of a pixel
+console.log(robo.screen.pixel(40, 40)); // > { r: 0, b: 20, g: 255 }
 ```
