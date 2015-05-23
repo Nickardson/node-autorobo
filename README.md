@@ -9,6 +9,8 @@ $ npm install autorobo
 
 See requirements for: https://github.com/joeferner/node-java
 
+## Docs
+
 ## Example
 ```javascript
 var robo = require("autorobo");

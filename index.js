@@ -94,7 +94,7 @@ exports.screen.stitchHorizontal = function (img1, img2) {
 
 /**
  * Saves the given BufferedImage to the given filename.
- * @param  {String filename The location to save the given image to.
+ * @param  {String} filename The location to save the given image to.
  * @param  {java.awt.image.BufferedImage} bufimg   An BufferedImage.
  * @return {autorobo}          The autorobo module, for chaining.
  */
