@@ -1,0 +1,1 @@
+jsdoc2md ../index.js > index.md
